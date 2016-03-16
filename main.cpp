@@ -53,14 +53,17 @@ int main() {
   fout << "T"<<"  "<<"Ainit"<<" "<<"Etat"<<"\n";
  
 
-  for(int t=1;t<=500;t++){
-      for(int a=0;a<=50;a++){
+  //~ for(int t=1;t<=50;t++){
+      //~ for(int a=0;a<=50;a++){
+        int t=450;
+        int a=45;
            System S(t,a);
            S.begin(10000);
            int E=S.get_Etat();
            fout<<t<<" "<<a<<" "<<E<<"\n";
-      }
-  }
+           cout<<t<<" "<<a<<" "<<E<<endl;
+      //~ }
+  //~ }
   fout.close();
  
 //  cout<<"_ _ _ _ _ _ _ _ _ _ _ "<<endl;

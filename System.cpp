@@ -23,7 +23,7 @@ int System::H_=0;
 
   System::System(int T,float Ainit): env_(Ainit){
     T_=T;
-    Ainit_=0;
+    Ainit_=Ainit;
     indiv_=new Indiv[W_*H_];
     for(int i=0;i<W_*H_/2;i++){
       int x=rand()%(W_*H_);
@@ -51,18 +51,18 @@ int System::H_=0;
 //                               Public Methods
 // ===========================================================================
   void System::begin(int tempsSimul){
-    for(int x=0;x<W_;x++){
+    for(int x=0;x<W_;x++){ //1er métabolisme
       for(int y=0;y<H_;y++){
         this->metabol(x,y);
       }
     }
 
-    for(int i=0; i<W_*H_;i++){
+    for(int i=0; i<W_*H_;i++){ // mise à jour de la fitness initiale
       indiv_[i].set_fitness();
     }
 
-    for(int i=0;i<tempsSimul;i++){
-      if(i>0 && i%T_==0){
+    for(int i=0;i<tempsSimul;i++){ 
+      if(i>0 && i%T_==0){ // réinitialisation du milieu tous les T pas de temps
         env_.reinit(Ainit_);
       }
       for(int x=0;x<W_;x++){
@@ -71,6 +71,17 @@ int System::H_=0;
         }
       }
       this->run1time();
+      int c=0;
+      //~ if(i==tempsSimul-1){
+      for(int j=0;j<W_*H_;j++){  
+        if(indiv_[j].isVivant()==false){
+            c++;
+        }
+      }
+      if(c==W_*H_){
+          cout<<"i : "<<i<<endl;
+      }
+      //~ }
     }
   }
 
@@ -207,6 +218,7 @@ int* isDivised=new int[W_*H_]; //garde en memoire les cellules déjà divisées
       }
       cout<<endl;
     }
+     cout<<"_ _ _ _ _ _ _ _ _ _ _ "<<endl;
   }
 
   //Methode a supprimer ensuite
@@ -217,6 +229,7 @@ int* isDivised=new int[W_*H_]; //garde en memoire les cellules déjà divisées
       }
       cout<<endl;
     }
+     cout<<"_ _ _ _ _ _ _ _ _ _ _ "<<endl;
   }
 
   //Methode a supprimer ensuite
@@ -227,4 +240,5 @@ int* isDivised=new int[W_*H_]; //garde en memoire les cellules déjà divisées
       }
       cout<<endl;
     }
+     cout<<"_ _ _ _ _ _ _ _ _ _ _ "<<endl;
   }
