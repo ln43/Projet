@@ -41,6 +41,7 @@ class System{
     void begin(int tempsSimul);
     void run1time();
     void metabol(int x,int y);
+    int get_Etat(); // Retourne 0 si exctinction, 2 si cohabitation, 1 si S meurt
     void affichageViv();//Methode a supprimer ensuite
     void affichageFit();//Methode a supprimer ensuite
     void affichageGen();//Methode a supprimer ensuite

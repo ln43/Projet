@@ -1,5 +1,5 @@
 P_mut  0
-P_death   0.05
+P_death   0.02
 W_min   0.001
 RAA   0.1
 RAB   0.1

@@ -176,6 +176,27 @@ int* isDivised=new int[W_*H_]; //garde en memoire les cellules déjà divisées
       env_.set_concentration(x,y,1,indiv_[x+y*W_].metabolB(bout));
     }
   }
+  
+  int System::get_Etat(){
+    int i=0;
+    while(indiv_[i].isVivant()==false && i<W_*H_-1){
+      i++;
+    }
+    if (i==W_*H_-1){
+      return 0;
+    }else{
+      int i=0;
+      while(indiv_[i].get_genotype()==0 && i<W_*H_-1){
+        i++;
+      }
+      if (i==W_*H_-1){
+        return 1;
+      }
+      else{
+        return 2;
+      }
+    }
+  }
 
   //Methode a supprimer ensuite
   void System::affichageViv(){
