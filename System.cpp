@@ -64,13 +64,19 @@ int System::H_=0;
     for(int i=0;i<tempsSimul;i++){ 
       if(i>0 && i%T_==0){ // réinitialisation du milieu tous les T pas de temps
         env_.reinit(Ainit_);
+        if(this->isDeath()){ //interrompe la simulation si la population est morte
+            i=tempsSimul;
+        }
       }
+      
       for(int x=0;x<W_;x++){
         for(int y=0;y<H_;y++){
           indiv_[x+y*W_].mute();
         }
       }
       this->run1time();
+      
+      //TEST
       int c=0;
       //~ if(i==tempsSimul-1){
       for(int j=0;j<W_*H_;j++){  
@@ -209,6 +215,17 @@ int* isDivised=new int[W_*H_]; //garde en memoire les cellules déjà divisées
     }
   }
 
+bool System::isDeath(){
+  int i=0;
+  while(indiv_[i].isVivant()==false && i<W_*H_-1){
+    i++;
+  }
+  if (i==W_*H_-1){
+    return true;
+  }else{
+    return false;
+  }
+}
   //Methode a supprimer ensuite
   void System::affichageViv(){
     for(int y=0;y<H_;y++){

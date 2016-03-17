@@ -45,6 +45,7 @@ class System{
     void affichageViv();//Methode a supprimer ensuite
     void affichageFit();//Methode a supprimer ensuite
     void affichageGen();//Methode a supprimer ensuite
+    bool isDeath();
 
  protected :
   // =========================================================================
