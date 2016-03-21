@@ -66,19 +66,12 @@ float System::wMin_=0;
       if(i>0 && i%T_==0){ // réinitialisation du milieu tous les T pas de temps
         env_.reinit(Ainit_);
       }
-      if(this->isDeath()){ //interrompe la simulation si la population est morte
+      if(isDeath()){ //interrompe la simulation si la population est morte
         i=tempsSimul;
       }
-      
-      for(int x=0;x<W_;x++){
-        for(int y=0;y<H_;y++){
-          indiv_[x+y*W_].mute();
-        }
-      }
-      this->run1time();
+      run1time();
     }
   }
-
 
   void System::run1time(){
 
@@ -149,10 +142,12 @@ float System::wMin_=0;
           indiv_[x+y*W_].set_C(indiv_[xFit+yFit*W_].get_C()/2);
           indiv_[x+y*W_].set_fitness();
           indiv_[x+y*W_].set_vivant();
+          indiv_[x+y*W_].mute();
           indiv_[xFit+yFit*W_].set_A(indiv_[xFit+yFit*W_].get_A()/2);
           indiv_[xFit+yFit*W_].set_B(indiv_[xFit+yFit*W_].get_B()/2);
           indiv_[xFit+yFit*W_].set_C(indiv_[xFit+yFit*W_].get_C()/2);
           indiv_[xFit+yFit*W_].set_fitness();
+          indiv_[xFit+yFit*W_].mute();
           isDivised[xFit+yFit*W_]=1;
           isDivised[x+y*W_]=1;
           gaps[indic]=1;
@@ -165,16 +160,17 @@ float System::wMin_=0;
       }
     }
     delete[] gaps;
+    delete[] isDivised;
 
     // Phase 4 : Vie grace au réseau métabolique
     for(int x=0;x<W_;x++){
       for(int y=0;y<H_;y++){
-        if(isDivised[x+y*W_]==0){
+        if(indiv_[x+y*W_].isVivant()){
           metabol(x,y);
         }
       }
     }
-    delete[] isDivised;
+    
   }
 
   void System::metabol(int x,int y){

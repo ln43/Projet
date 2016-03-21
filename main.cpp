@@ -49,14 +49,15 @@ int main() {
   System::set_params(w,h,w_min);
   
   ofstream fout;
-  fout.open("data2.txt", ios::out | ios::trunc);
+  fout.open("data.txt", ios::out | ios::trunc);
   fout << "T"<<"  "<<"Ainit"<<" "<<"Etat"<<"\n";
  
 
-  for(int t=1;t<=500;t=t+1){
+
+  for(int t=1;t<=200;t=t+10){
       for(int a=0;a<=50;a++){
-        //~ int t=20;
-        //~ int a=0;
+        //~ int t=500;
+        //~ int a=0.1;
            System S(t,a);
            S.begin(10000);
            int E=S.get_Etat();
@@ -65,6 +66,8 @@ int main() {
       }
   }
   fout.close();
+  
+
  
 //  cout<<"_ _ _ _ _ _ _ _ _ _ _ "<<endl;
 //  S1.begin(10);
