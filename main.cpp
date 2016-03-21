@@ -53,7 +53,7 @@ int main() {
   fout << "T"<<"  "<<"Ainit"<<" "<<"Etat"<<"\n";
  
 
-  for(int t=1;t<=50;t++){
+  for(int t=1;t<=200;t++){
       for(int a=0;a<=50;a++){
         //~ int t=450;
         //~ int a=45;

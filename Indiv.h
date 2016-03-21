@@ -50,6 +50,7 @@ class Indiv{
     void death();
     void mute();
     void set_fitness();
+    void set_vivant();
     float metabolA(float Aout);//return Aout
     float metabolB(float Bout);//return Bout
 
@@ -90,6 +91,7 @@ class Indiv{
   inline void Indiv::set_A(float a){A_=a;}
   inline void Indiv::set_B(float b){B_=b;}
   inline void Indiv::set_C(float c){C_=c;}
+  inline void Indiv::set_vivant(){vivant=true;}
 
   inline void Indiv::set_params(float pMut,float pDeath,float wMin,float raa,
   float rab,float rbb,float rbc){

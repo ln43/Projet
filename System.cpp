@@ -64,9 +64,9 @@ int System::H_=0;
     for(int i=0;i<tempsSimul;i++){ 
       if(i>0 && i%T_==0){ // réinitialisation du milieu tous les T pas de temps
         env_.reinit(Ainit_);
-        if(this->isDeath()){ //interrompe la simulation si la population est morte
-            i=tempsSimul;
-        }
+      }
+      if(this->isDeath()){ //interrompe la simulation si la population est morte
+        i=tempsSimul;
       }
       
       for(int x=0;x<W_;x++){
@@ -76,18 +76,20 @@ int System::H_=0;
       }
       this->run1time();
       
-      //TEST
-      int c=0;
-      //~ if(i==tempsSimul-1){
-      for(int j=0;j<W_*H_;j++){  
-        if(indiv_[j].isVivant()==false){
-            c++;
-        }
-      }
-      if(c==W_*H_){
-          cout<<"i : "<<i<<endl;
-      }
+      //~ //TEST
+      //~ int c=0;
+      //~ for(int j=0;j<W_*H_;j++){  
+        //~ if(indiv_[j].isVivant()==false){
+            //~ c++;
+        //~ }
       //~ }
+      //~ if(c==W_*H_){
+          //~ cout<<"i : "<<i<<endl;
+      //~ }
+      //~ if(i>0 &&i<300){
+        //~ this->affichageViv();
+      //~ }
+      
     }
   }
 
@@ -114,7 +116,7 @@ int System::H_=0;
     }
 
     //Phase 3 : competition
-int* isDivised=new int[W_*H_]; //garde en memoire les cellules déjà divisées
+    int* isDivised=new int[W_*H_]; //garde en memoire les cellules déjà divisées
     for(int i=0;i<W_*H_;i++){
       isDivised[i]=0; // vaut 0 si non divisé
     }
@@ -161,6 +163,7 @@ int* isDivised=new int[W_*H_]; //garde en memoire les cellules déjà divisées
         indiv_[x+y*W_].set_B(indiv_[xFit+yFit*W_].get_B()/2);
         indiv_[x+y*W_].set_C(indiv_[xFit+yFit*W_].get_C()/2);
         indiv_[x+y*W_].set_fitness();
+        indiv_[x+y*W_].set_vivant();
         indiv_[xFit+yFit*W_].set_A(indiv_[xFit+yFit*W_].get_A()/2);
         indiv_[xFit+yFit*W_].set_B(indiv_[xFit+yFit*W_].get_B()/2);
         indiv_[xFit+yFit*W_].set_C(indiv_[xFit+yFit*W_].get_C()/2);
@@ -195,11 +198,7 @@ int* isDivised=new int[W_*H_]; //garde en memoire les cellules déjà divisées
   }
   
   int System::get_Etat(){
-    int i=0;
-    while(indiv_[i].isVivant()==false && i<W_*H_-1){
-      i++;
-    }
-    if (i==W_*H_-1){
+    if (this->isDeath()){
       return 0;
     }else{
       int i=0;
@@ -216,11 +215,14 @@ int* isDivised=new int[W_*H_]; //garde en memoire les cellules déjà divisées
   }
 
 bool System::isDeath(){
-  int i=0;
-  while(indiv_[i].isVivant()==false && i<W_*H_-1){
-    i++;
+  int d=0;
+  for(int i=0;i<W_*H_;i++){
+    if(indiv_[i].isVivant()==false){
+      d++;
+    }
   }
-  if (i==W_*H_-1){
+  //~ cout<<"d : "<<d<<endl;
+  if (d==W_*H_){
     return true;
   }else{
     return false;
