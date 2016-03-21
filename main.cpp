@@ -46,17 +46,17 @@ int main() {
 
   Indiv::set_params(p_mut,p_death,w_min,RAA,RAB,RBB,RBC);
   Envir::set_params(d,w,h);
-  System::set_params(w,h);
+  System::set_params(w,h,w_min);
   
   ofstream fout;
-  fout.open("data.txt", ios::out | ios::trunc);
+  fout.open("data2.txt", ios::out | ios::trunc);
   fout << "T"<<"  "<<"Ainit"<<" "<<"Etat"<<"\n";
  
 
-  for(int t=1;t<=200;t++){
+  for(int t=1;t<=500;t=t+1){
       for(int a=0;a<=50;a++){
-        //~ int t=450;
-        //~ int a=45;
+        //~ int t=20;
+        //~ int a=0;
            System S(t,a);
            S.begin(10000);
            int E=S.get_Etat();

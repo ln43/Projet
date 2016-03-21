@@ -30,8 +30,8 @@ float Indiv::RBC_=0;
   Indiv::Indiv(int genot){
     genot_=genot;
     A_=0;
-    B_=1;
-    C_=2;
+    B_=0;
+    C_=0;
     if (genot_==0){
       fit_=B_;
     }else{

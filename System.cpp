@@ -11,6 +11,7 @@ using namespace std;
 // ===========================================================================
 int System::W_=0;
 int System::H_=0;
+float System::wMin_=0;
 
 // ===========================================================================
 //                                Constructors
@@ -53,7 +54,7 @@ int System::H_=0;
   void System::begin(int tempsSimul){
     for(int x=0;x<W_;x++){ //1er métabolisme
       for(int y=0;y<H_;y++){
-        this->metabol(x,y);
+        metabol(x,y);
       }
     }
 
@@ -75,21 +76,6 @@ int System::H_=0;
         }
       }
       this->run1time();
-      
-      //~ //TEST
-      //~ int c=0;
-      //~ for(int j=0;j<W_*H_;j++){  
-        //~ if(indiv_[j].isVivant()==false){
-            //~ c++;
-        //~ }
-      //~ }
-      //~ if(c==W_*H_){
-          //~ cout<<"i : "<<i<<endl;
-      //~ }
-      //~ if(i>0 &&i<300){
-        //~ this->affichageViv();
-      //~ }
-      
     }
   }
 
@@ -107,10 +93,8 @@ int System::H_=0;
         if(indiv_[x+y*W_].isVivant()==false){
           float A= env_.get_concentration(x,y,0);
           float B= env_.get_concentration(x,y,1);
-          float C= env_.get_concentration(x,y,2);
           env_.set_concentration(x,y,0,A+indiv_[x+y*W_].get_A());
           env_.set_concentration(x,y,1,B+indiv_[x+y*W_].get_B());
-          env_.set_concentration(x,y,2,C+indiv_[x+y*W_].get_C());
         }
       }
     }
@@ -136,9 +120,9 @@ int System::H_=0;
       if(gaps[indic]==0){
         int x=indic%W_;
         int y=indic/W_;
-        int xFit=0;
-        int yFit=0;
-        int fitMax=0;
+        int xFit=-1;
+        int yFit=-1;
+        float fitMax=wMin_;
         for(int i=-1;i<=1;i++){
           for(int j=-1;j<=1;j++){
             if(i!=0 || j!=0){
@@ -149,7 +133,7 @@ int System::H_=0;
               if(Y==H_){Y=0;}
               else if(Y==-1){Y=H_-1;}
               if(isDivised[X+Y*W_]==0){
-                if(fitMax<indiv_[X+Y*W_].get_fitness()){
+                if(fitMax<=indiv_[X+Y*W_].get_fitness()){
                   fitMax=indiv_[X+Y*W_].get_fitness();
                   xFit=X;
                   yFit=Y;
@@ -158,20 +142,26 @@ int System::H_=0;
             }
           }
         }
-        indiv_[x+y*W_].set_genotype(indiv_[xFit+yFit*W_].get_genotype());
-        indiv_[x+y*W_].set_A(indiv_[xFit+yFit*W_].get_A()/2);
-        indiv_[x+y*W_].set_B(indiv_[xFit+yFit*W_].get_B()/2);
-        indiv_[x+y*W_].set_C(indiv_[xFit+yFit*W_].get_C()/2);
-        indiv_[x+y*W_].set_fitness();
-        indiv_[x+y*W_].set_vivant();
-        indiv_[xFit+yFit*W_].set_A(indiv_[xFit+yFit*W_].get_A()/2);
-        indiv_[xFit+yFit*W_].set_B(indiv_[xFit+yFit*W_].get_B()/2);
-        indiv_[xFit+yFit*W_].set_C(indiv_[xFit+yFit*W_].get_C()/2);
-        indiv_[xFit+yFit*W_].set_fitness();
-        isDivised[xFit+yFit*W_]=1;
-        isDivised[x+y*W_]=1;
-        gaps[indic]=1;
-        nbGaps--;
+        if(xFit!=-1){
+          indiv_[x+y*W_].set_genotype(indiv_[xFit+yFit*W_].get_genotype());
+          indiv_[x+y*W_].set_A(indiv_[xFit+yFit*W_].get_A()/2);
+          indiv_[x+y*W_].set_B(indiv_[xFit+yFit*W_].get_B()/2);
+          indiv_[x+y*W_].set_C(indiv_[xFit+yFit*W_].get_C()/2);
+          indiv_[x+y*W_].set_fitness();
+          indiv_[x+y*W_].set_vivant();
+          indiv_[xFit+yFit*W_].set_A(indiv_[xFit+yFit*W_].get_A()/2);
+          indiv_[xFit+yFit*W_].set_B(indiv_[xFit+yFit*W_].get_B()/2);
+          indiv_[xFit+yFit*W_].set_C(indiv_[xFit+yFit*W_].get_C()/2);
+          indiv_[xFit+yFit*W_].set_fitness();
+          isDivised[xFit+yFit*W_]=1;
+          isDivised[x+y*W_]=1;
+          gaps[indic]=1;
+          nbGaps--;
+        }else{
+          isDivised[x+y*W_]=1;
+          gaps[indic]=1;  
+          nbGaps--;
+        }
       }
     }
     delete[] gaps;
@@ -180,7 +170,7 @@ int System::H_=0;
     for(int x=0;x<W_;x++){
       for(int y=0;y<H_;y++){
         if(isDivised[x+y*W_]==0){
-          this->metabol(x,y);
+          metabol(x,y);
         }
       }
     }
@@ -198,14 +188,14 @@ int System::H_=0;
   }
   
   int System::get_Etat(){
-    if (this->isDeath()){
+    if (isDeath()){
       return 0;
     }else{
       int i=0;
-      while(indiv_[i].get_genotype()==0 && i<W_*H_-1){
+      while(indiv_[i].get_genotype()==0 && i<W_*H_){
         i++;
       }
-      if (i==W_*H_-1){
+      if (i==W_*H_){
         return 1;
       }
       else{
@@ -221,7 +211,6 @@ bool System::isDeath(){
       d++;
     }
   }
-  //~ cout<<"d : "<<d<<endl;
   if (d==W_*H_){
     return true;
   }else{
@@ -256,6 +245,38 @@ bool System::isDeath(){
     for(int y=0;y<H_;y++){
       for(int x=0;x<W_;x++){
         cout<<indiv_[x+y*W_].get_genotype()<<" ";
+      }
+      cout<<endl;
+    }
+     cout<<"_ _ _ _ _ _ _ _ _ _ _ "<<endl;
+  }
+  //Methode a supprimer ensuite
+  void System::affichageA(){
+    for(int y=0;y<H_;y++){
+      for(int x=0;x<W_;x++){
+        cout<<indiv_[x+y*W_].get_A()<<" ";
+      }
+      cout<<endl;
+    }
+     cout<<"_ _ _ _ _ _ _ _ _ _ _ "<<endl;
+  }
+  
+  //Methode a supprimer ensuite
+  void System::affichageB(){
+    for(int y=0;y<H_;y++){
+      for(int x=0;x<W_;x++){
+        cout<<indiv_[x+y*W_].get_B()<<" ";
+      }
+      cout<<endl;
+    }
+     cout<<"_ _ _ _ _ _ _ _ _ _ _ "<<endl;
+  }
+  
+  //Methode a supprimer ensuite
+  void System::affichageC(){
+    for(int y=0;y<H_;y++){
+      for(int x=0;x<W_;x++){
+        cout<<indiv_[x+y*W_].get_C()<<" ";
       }
       cout<<endl;
     }

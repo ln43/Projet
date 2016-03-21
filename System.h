@@ -29,7 +29,7 @@ class System{
   // =========================================================================
   //                                  Setters
   // =========================================================================
-  inline static void set_params(int W,int H);
+  inline static void set_params(int W,int H,float wMin);
 
   // =========================================================================
   //                                 Operators
@@ -45,6 +45,9 @@ class System{
     void affichageViv();//Methode a supprimer ensuite
     void affichageFit();//Methode a supprimer ensuite
     void affichageGen();//Methode a supprimer ensuite
+    void affichageA();//Methode a supprimer ensuite
+    void affichageB();//Methode a supprimer ensuite
+    void affichageC();//Methode a supprimer ensuite
     bool isDeath();
 
  protected :
@@ -61,13 +64,15 @@ class System{
   float Ainit_;
   static int W_;
   static int H_;
+  static float wMin_;
 };
   // =========================================================================
   //                                INLINE
   // =========================================================================
-  inline void System::set_params(int W,int H){
+  inline void System::set_params(int W,int H,float wMin){
     W_=W;
     H_=H;
+    wMin_=wMin;
   };
   
 #endif
