@@ -1,6 +1,6 @@
 rm(list=ls())
 
-d=read.table("data.txt",col.names=c("T","Ainit","Etat"),header=T)
+d=read.table("data500.txt",col.names=c("T","Ainit","Etat"),header=T)
 
 #View3
 etat <- factor(d$"Etat")

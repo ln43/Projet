@@ -49,12 +49,12 @@ int main() {
   System::set_params(w,h,w_min);
   
   ofstream fout;
-  fout.open("data.txt", ios::out | ios::trunc);
+  fout.open("data500.txt", ios::out | ios::trunc);
   fout << "T"<<"  "<<"Ainit"<<" "<<"Etat"<<"\n";
  
 
 
-  for(int t=1;t<=200;t=t+10){
+  for(int t=1;t<=500;t=t+1){
       for(int a=0;a<=50;a++){
         //~ int t=500;
         //~ int a=0.1;

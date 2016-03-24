@@ -78,6 +78,18 @@ float System::wMin_=0;
 
     //Phase1 : diffusion des métabolites externes
     env_.diffusion();
+    
+    //Memoire des trous 
+    int* gaps=new int[W_*H_]; //retient si la case est un trou, vaut 0 si trou
+    int nbGaps=0;
+    for(int x=0;x<W_;x++){
+      for(int y=0;y<H_;y++){
+        if(indiv_[x+y*W_].isVivant()==false){
+          gaps[x+y*W_]=0;
+          nbGaps++;
+        }else {gaps[x+y*W_]=1;}
+      }
+    }
 
     //Phase 2 : mort
     for(int x=0;x<W_;x++){
@@ -96,16 +108,6 @@ float System::wMin_=0;
     int* isDivised=new int[W_*H_]; //garde en memoire les cellules déjà divisées
     for(int i=0;i<W_*H_;i++){
       isDivised[i]=0; // vaut 0 si non divisé
-    }
-    int* gaps=new int[W_*H_]; //retient si la case est un trou, vaut 0 si trou
-    int nbGaps=0;
-    for(int x=0;x<W_;x++){
-      for(int y=0;y<H_;y++){
-        if(indiv_[x+y*W_].isVivant()==false){
-          gaps[x+y*W_]=0;
-          nbGaps++;
-        }else {gaps[x+y*W_]=1;}
-      }
     }
 
     while(nbGaps>0){
@@ -126,7 +128,7 @@ float System::wMin_=0;
               if(Y==H_){Y=0;}
               else if(Y==-1){Y=H_-1;}
               if(isDivised[X+Y*W_]==0){
-                if(fitMax<=indiv_[X+Y*W_].get_fitness()){
+                if(fitMax<=indiv_[X+Y*W_].get_fitness() && indiv_[X+Y*W_].isVivant()){
                   fitMax=indiv_[X+Y*W_].get_fitness();
                   xFit=X;
                   yFit=Y;
