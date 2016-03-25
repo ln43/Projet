@@ -49,22 +49,23 @@ int main() {
   System::set_params(w,h,w_min);
   
   ofstream fout;
-  fout.open("data500.txt", ios::out | ios::trunc);
+  
+  fout.open("dataEss.txt", ios::out | ios::trunc);
   fout << "T"<<"  "<<"Ainit"<<" "<<"Etat"<<"\n";
  
 
 
-  for(int t=1;t<=500;t=t+1){
-      for(int a=0;a<=50;a++){
-        //~ int t=500;
-        //~ int a=0.1;
+  //~ for(int t=1;t<=500;t=t+10){
+      //~ for(int a=0;a<=50;a++){
+        int t=480;
+        int a=21;
            System S(t,a);
            S.begin(10000);
            int E=S.get_Etat();
            fout<<t<<" "<<a<<" "<<E<<"\n";
            cout<<t<<" "<<a<<" "<<E<<endl;
-      }
-  }
+      //~ }
+  //~ }
   fout.close();
   
 
