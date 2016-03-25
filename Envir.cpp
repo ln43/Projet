@@ -54,6 +54,10 @@ using namespace std;
         for(int c=0;c<2;c++){
           newConcent[(x+y*W_)*2+c]=concent_[(x+y*W_)*2+c];
         }
+      }
+    }
+    for(int x=0;x<W_;x++){
+      for(int y=0;y<H_;y++){
         for(int i=-1;i<=1;i++){
           for(int j=-1;j<=1;j++){
             X=x+i;
@@ -68,7 +72,7 @@ using namespace std;
           }
         }
         for(int c=0;c<2;c++){
-          newConcent[(x+y*W_)*2+c]-=9*D_*concent_[(x+y*W_)*2+c];
+          newConcent[(x+y*W_)*2+c]=newConcent[(x+y*W_)*2+c]-9*D_*concent_[(x+y*W_)*2+c];
         }
       }
     }
@@ -88,6 +92,17 @@ using namespace std;
     for(int y=0;y<H_;y++){
       for(int x=0;x<W_;x++){
           cout<<concent_[(x+y*W_)*2]<<" ";
+      }
+      cout<<endl;
+    }
+     cout<<"_ _ _ _ _ _ _ _ _ _ _ "<<endl;
+  }
+
+  //Methode à supprimer ensuite
+  void Envir::affichageB(){
+    for(int y=0;y<H_;y++){
+      for(int x=0;x<W_;x++){
+          cout<<concent_[(x+y*W_)*2+1]<<" ";
       }
       cout<<endl;
     }

@@ -72,28 +72,28 @@ float Indiv::RBC_=0;
   }
 
   float Indiv::metabolA(float aout){
-    float Aout=aout;
-    float a=A_;
+    float a_out=aout;
     for (float t=0;t<1;t+=0.1){
-      Aout=Aout-Aout*RAA_*0.1;
-      A_=A_+(aout*RAA_-A_*RAB_)*0.1;
-      B_=B_+a*RAB_*0.1;
-      aout=Aout;
-      a=A_;
+      float nAout=a_out-a_out*RAA_*0.1;
+      float na=A_+(a_out*RAA_-A_*RAB_)*0.1;
+      float nb=B_+A_*RAB_*0.1;
+      a_out=nAout;
+      A_=na;
+      B_=nb;
     }
-    return Aout;
+    return a_out;
   }
 
   float Indiv::metabolB(float bout){
-    float Bout=bout;
-    float b=B_;
+    float b_out=bout;
     for (float t=0;t<1;t+=0.1){
-      Bout=Bout-Bout*RBB_*0.1;
-      B_=B_+(bout*RBB_-B_*RBC_)*0.1;
-      C_=C_+b*RBC_*0.1;
-      b=B_;
-      bout=Bout;
+      float nBout=b_out-b_out*RBB_*0.1;
+      float nb=B_+(b_out*RBB_-B_*RBC_)*0.1;
+      float nc=C_+B_*RBC_*0.1;
+      b_out=nBout;
+      B_=nb;
+      C_=nc;
     }
-    return Bout;
+    return b_out;
   }
 

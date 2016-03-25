@@ -57,8 +57,8 @@ int main() {
 
   //~ for(int t=1;t<=500;t=t+10){
       //~ for(int a=0;a<=50;a++){
-        int t=480;
-        int a=21;
+        int t=200;
+        int a=42;
            System S(t,a);
            S.begin(10000);
            int E=S.get_Etat();

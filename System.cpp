@@ -66,13 +66,19 @@ float System::wMin_=0;
       if(i>0 && i%T_==0){ // réinitialisation du milieu tous les T pas de temps
         env_.reinit(Ainit_);
       }
-      if(isDeath()){ //interrompe la simulation si la population est morte
+      if(isDeath()){ //interrompt la simulation si la population est morte
         i=tempsSimul;
       }
       run1time();
-      env_.affichageA();
+      
+      //~ if(i<5){
+        //~ env_.affichageB();
+        //~ affichageViv();
+      //~ }
     }
+
   }
+
 
   void System::run1time(){
 
@@ -93,14 +99,19 @@ float System::wMin_=0;
     }
 
     //Phase 2 : mort
+    int compt=0;
     for(int x=0;x<W_;x++){
       for(int y=0;y<H_;y++){
-        indiv_[x+y*W_].death();
-        if(indiv_[x+y*W_].isVivant()==false){
-          float A= env_.get_concentration(x,y,0);
-          float B= env_.get_concentration(x,y,1);
-          env_.set_concentration(x,y,0,A+indiv_[x+y*W_].get_A());
-          env_.set_concentration(x,y,1,B+indiv_[x+y*W_].get_B());
+        if(indiv_[x+y*W_].isVivant()){
+          indiv_[x+y*W_].death();
+          if(indiv_[x+y*W_].isVivant()==false){
+            float A= env_.get_concentration(x,y,0);
+            float B= env_.get_concentration(x,y,1);
+            if(x==10 && y==10){cout<<"B:"<<B<<endl;}
+            env_.set_concentration(x,y,0,A+indiv_[x+y*W_].get_A());
+            env_.set_concentration(x,y,1,B+indiv_[x+y*W_].get_B());
+            if(x==10 && y==10){cout<<"new B:"<<env_.get_concentration(x,y,1)<<endl;}
+          }
         }
       }
     }
@@ -190,14 +201,15 @@ float System::wMin_=0;
     if (isDeath()){
       return 0;
     }else{
-      int i=0;
-      while(indiv_[i].get_genotype()==0 && i<W_*H_){
-        i++;
+      int compt=0;
+      for(int j=0;j<W_*H_;j++){
+        if(indiv_[j].get_genotype()==0){
+          compt++;
+        }
       }
-      if (i==W_*H_){
+      if (compt==W_*H_){
         return 1;
-      }
-      else{
+      }else{
         return 2;
       }
     }
