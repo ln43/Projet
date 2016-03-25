@@ -70,6 +70,7 @@ float System::wMin_=0;
         i=tempsSimul;
       }
       run1time();
+      env_.affichageA();
     }
   }
 
@@ -217,6 +218,7 @@ bool System::isDeath(){
 }
   //Methode a supprimer ensuite
   void System::affichageViv(){
+    cout<<"VIVANT"<<endl;
     for(int y=0;y<H_;y++){
       for(int x=0;x<W_;x++){
         if(indiv_[x+y*W_].isVivant()){cout<<"1 ";}
@@ -229,6 +231,7 @@ bool System::isDeath(){
 
   //Methode a supprimer ensuite
   void System::affichageFit(){
+    cout<<"FITNESS"<<endl;
     for(int y=0;y<H_;y++){
       for(int x=0;x<W_;x++){
         cout<<indiv_[x+y*W_].get_fitness()<<" ";
@@ -240,6 +243,7 @@ bool System::isDeath(){
 
   //Methode a supprimer ensuite
   void System::affichageGen(){
+    cout<<"GENOTYPE"<<endl;
     for(int y=0;y<H_;y++){
       for(int x=0;x<W_;x++){
         cout<<indiv_[x+y*W_].get_genotype()<<" ";
@@ -250,6 +254,7 @@ bool System::isDeath(){
   }
   //Methode a supprimer ensuite
   void System::affichageA(){
+    cout<<"CONCENTRATION A INDIV"<<endl;
     for(int y=0;y<H_;y++){
       for(int x=0;x<W_;x++){
         cout<<indiv_[x+y*W_].get_A()<<" ";
@@ -261,6 +266,7 @@ bool System::isDeath(){
   
   //Methode a supprimer ensuite
   void System::affichageB(){
+    cout<<"CONCENTRATION B INDIV"<<endl;
     for(int y=0;y<H_;y++){
       for(int x=0;x<W_;x++){
         cout<<indiv_[x+y*W_].get_B()<<" ";
@@ -272,6 +278,7 @@ bool System::isDeath(){
   
   //Methode a supprimer ensuite
   void System::affichageC(){
+    cout<<"CONCENTRATION C INDIV"<<endl;
     for(int y=0;y<H_;y++){
       for(int x=0;x<W_;x++){
         cout<<indiv_[x+y*W_].get_C()<<" ";
