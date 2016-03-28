@@ -74,7 +74,7 @@ float Indiv::RBC_=0;
   float Indiv::metabolA(float aout){
     float Aout=aout;
     float a=A_;
-    for (float t=0;t<1;t+=0.1){
+    for (float t=0;t<1;t=t+0.1){
       Aout=Aout-Aout*RAA_*0.1;
       A_=A_+(aout*RAA_-A_*RAB_)*0.1;
       B_=B_+a*RAB_*0.1;
@@ -87,7 +87,7 @@ float Indiv::RBC_=0;
   float Indiv::metabolB(float bout){
     float Bout=bout;
     float b=B_;
-    for (float t=0;t<1;t+=0.1){
+    for (float t=0;t<1;t=t+0.1){
       Bout=Bout-Bout*RBB_*0.1;
       B_=B_+(bout*RBB_-B_*RBC_)*0.1;
       C_=C_+b*RBC_*0.1;

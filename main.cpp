@@ -54,20 +54,19 @@ int main() {
  
 
 
-  for(int t=1;t<=500;t=t+1){
-      for(int a=0;a<=50;a++){
-        //~ int t=500;
-        //~ int a=0.1;
+  //~ for(int t=1;t<=500;t=t+1){
+      //~ for(int a=0;a<=50;a++){
+        int t=220;
+        int a=40;
            System S(t,a);
            S.begin(10000);
            int E=S.get_Etat();
            fout<<t<<" "<<a<<" "<<E<<"\n";
            cout<<t<<" "<<a<<" "<<E<<endl;
-      }
-  }
+      //~ }
+  //~ }
   fout.close();
-  
-
+  //~ 
  
 //  cout<<"_ _ _ _ _ _ _ _ _ _ _ "<<endl;
 //  S1.begin(10);
