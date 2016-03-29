@@ -50,22 +50,34 @@ int main() {
   
   ofstream fout;
   
-  fout.open("dataEss.txt", ios::out | ios::trunc);
+  fout.open("databis.txt", ios::out | ios::trunc);
   fout << "T"<<"  "<<"Ainit"<<" "<<"Etat"<<"\n";
  
 
-
-  //~ for(int t=1;t<=500;t=t+10){
-      //~ for(int a=0;a<=50;a++){
-        int t=200;
-        int a=42;
+  for(int t=1;t<=500;t=t+5){
+       for(int a=0;a<=50;a++){
+        //~ int t=40;
+        //~ int a=42;
            System S(t,a);
            S.begin(10000);
            int E=S.get_Etat();
            fout<<t<<" "<<a<<" "<<E<<"\n";
            cout<<t<<" "<<a<<" "<<E<<endl;
-      //~ }
-  //~ }
+      }
+  }
+  
+    for(int t=500;t<=1000;t=t+25){
+       for(int a=0;a<=50;a++){
+        //~ int t=40;
+        //~ int a=42;
+           System S(t,a);
+           S.begin(10000);
+           int E=S.get_Etat();
+           fout<<t<<" "<<a<<" "<<E<<"\n";
+           cout<<t<<" "<<a<<" "<<E<<endl;
+      }
+  }
+  
   fout.close();
   
 

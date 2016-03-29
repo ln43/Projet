@@ -51,7 +51,8 @@ float System::wMin_=0;
 // ===========================================================================
 //                               Public Methods
 // ===========================================================================
-  void System::begin(int tempsSimul){
+  void System::begin(int tempsSimul){ 
+    
     for(int x=0;x<W_;x++){ //1er métabolisme
       for(int y=0;y<H_;y++){
         metabol(x,y);
@@ -61,6 +62,7 @@ float System::wMin_=0;
     for(int i=0; i<W_*H_;i++){ // mise à jour de la fitness initiale
       indiv_[i].set_fitness();
     }
+    
 
     for(int i=0;i<tempsSimul;i++){ 
       if(i>0 && i%T_==0){ // réinitialisation du milieu tous les T pas de temps
@@ -70,13 +72,7 @@ float System::wMin_=0;
         i=tempsSimul;
       }
       run1time();
-      
-      //~ if(i<5){
-        //~ env_.affichageB();
-        //~ affichageViv();
-      //~ }
     }
-
   }
 
 
@@ -99,7 +95,6 @@ float System::wMin_=0;
     }
 
     //Phase 2 : mort
-    int compt=0;
     for(int x=0;x<W_;x++){
       for(int y=0;y<H_;y++){
         if(indiv_[x+y*W_].isVivant()){
@@ -107,10 +102,8 @@ float System::wMin_=0;
           if(indiv_[x+y*W_].isVivant()==false){
             float A= env_.get_concentration(x,y,0);
             float B= env_.get_concentration(x,y,1);
-            if(x==10 && y==10){cout<<"B:"<<B<<endl;}
             env_.set_concentration(x,y,0,A+indiv_[x+y*W_].get_A());
             env_.set_concentration(x,y,1,B+indiv_[x+y*W_].get_B());
-            if(x==10 && y==10){cout<<"new B:"<<env_.get_concentration(x,y,1)<<endl;}
           }
         }
       }
@@ -181,6 +174,7 @@ float System::wMin_=0;
       for(int y=0;y<H_;y++){
         if(indiv_[x+y*W_].isVivant()){
           metabol(x,y);
+          indiv_[x+y*W_].set_fitness();
         }
       }
     }
