@@ -1,22 +1,18 @@
 rm(list=ls())
 
-d=read.table("data500.txt",col.names=c("T","Ainit","Etat"),header=T)
+d=read.table("VFmut.txt",col.names=c("T","Ainit","Etat"),header=T)
 
-#View3
 etat <- factor(d$"Etat")
 mescouleurs <- rainbow(length(levels(etat)))
-plot(d$"T", d$"Ainit", pch = 20, col = mescouleurs[etat])
-legend("topleft", inset = 0.02, pch = 19, legend = levels(etat), col = mescouleurs)
+plot(d$"T", d$"Ainit", pch = 19, col = mescouleurs[etat], main="Diagramme Transition Sans Mutation")
+legend("topright", inset = 0.02, pch = 19, legend = c("extinction","exclusion","cohabitation"), col = mescouleurs)
 
-#View 1
-library(car) 
-scatterplot(Ainit ~ T | Etat, data=d,
-            xlab="T", ylab="Ainit",
-            main="Simulation") 
+#_ _ _ _ _ _ _
 
-#View 2
-#install.packages("ggplot2")
-library(ggplot2)
-p=ggplot(data=d, aes(x=T, y=Ainit, colour=Etat))
-p= p + geom_raster(aes(fill = Etat),hjust=0.5,vjust=0.5, interpolate=FALSE)
-print(p)
+
+dmut=read.table("VFmut.txt",col.names=c("T","Ainit","Etat"),header=T)
+
+etat <- factor(dmut$"Etat")
+mescouleurs <- rainbow(length(levels(etat)))
+plot(dmut$"T", dmut$"Ainit", pch = 19, col = mescouleurs[etat])
+legend("topright", inset = 0.02, pch = 19, legend = c("extinction","cohabitation"), col = mescouleurs)
