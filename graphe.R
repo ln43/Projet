@@ -1,10 +1,10 @@
 rm(list=ls())
 
-d=read.table("VFmut.txt",col.names=c("T","Ainit","Etat"),header=T)
+d=read.table("VF.txt",col.names=c("T","Ainit","Etat"),header=T)
 
 etat <- factor(d$"Etat")
 mescouleurs <- rainbow(length(levels(etat)))
-plot(d$"T", d$"Ainit", pch = 19, col = mescouleurs[etat], main="Diagramme Transition Sans Mutation")
+plot(d$"T", d$"Ainit", pch = 19, col = mescouleurs[etat], main="Diagramme Transition Sans Mutation",xlab="T",ylab="Ainit")
 legend("topright", inset = 0.02, pch = 19, legend = c("extinction","exclusion","cohabitation"), col = mescouleurs)
 
 #_ _ _ _ _ _ _
@@ -14,5 +14,13 @@ dmut=read.table("VFmut.txt",col.names=c("T","Ainit","Etat"),header=T)
 
 etat <- factor(dmut$"Etat")
 mescouleurs <- rainbow(length(levels(etat)))
-plot(dmut$"T", dmut$"Ainit", pch = 19, col = mescouleurs[etat])
+plot(dmut$"T", dmut$"Ainit", pch = 19, col = mescouleurs[etat], main="Diagramme Transition Avec Mutation",xlab="T",ylab="Ainit")
 legend("topright", inset = 0.02, pch = 19, legend = c("extinction","cohabitation"), col = mescouleurs)
+
+
+dess=read.table("Essai.txt",col.names=c("T","Ainit","D","Etat"),header=T)
+
+etat <- factor(dess$"Etat")
+mescouleurs <- rainbow(length(levels(etat)))
+points3D(dess$"T", dess$"Ainit", dess$"D", pch = 19, col = mescouleurs[etat], main="Diagramme Transition Avec Mutation",xlab="T",ylab="Ainit")
+legend("topright", inset = 0.02, pch = 19, legend = levels(etat), col = mescouleurs)
