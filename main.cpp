@@ -47,47 +47,90 @@ int main() {
   Indiv::set_params(p_mut,p_death,w_min,RAA,RAB,RBB,RBC);
   Envir::set_params(d,w,h);
   System::set_params(w,h,w_min);
-  
-  ofstream fout;
-  
-  fout.open("databis.txt", ios::out | ios::trunc);
-  fout << "T"<<"  "<<"Ainit"<<" "<<"Etat"<<"\n";
- 
 
+
+//Sans faire varier D  
+  ofstream fout1;
+  
+  fout1.open("data1sM.txt", ios::out | ios::trunc);
+  fout1 << "T"<<"  "<<"Ainit"<<" "<<"Etat"<<"\n";
+ 
   for(int t=1;t<=500;t=t+5){
-       for(int a=0;a<=50;a++){
-        //~ int t=40;
-        //~ int a=42;
-           System S(t,a);
-           S.begin(10000);
-           int E=S.get_Etat();
-           fout<<t<<" "<<a<<" "<<E<<"\n";
-           cout<<t<<" "<<a<<" "<<E<<endl;
-      }
+    for(int a=0;a<=50;a++){
+      System S(t,a);
+      S.begin(10000);
+      int E=S.get_Etat();
+      fout1<<t<<" "<<a<<" "<<E<<"\n";
+      cout<<t<<" "<<a<<" "<<E<<endl;
+    }
   }
+  fout1.close();
   
-    for(int t=500;t<=1000;t=t+25){
-       for(int a=0;a<=50;a++){
-        //~ int t=40;
-        //~ int a=42;
-           System S(t,a);
-           S.begin(10000);
-           int E=S.get_Etat();
-           fout<<t<<" "<<a<<" "<<E<<"\n";
-           cout<<t<<" "<<a<<" "<<E<<endl;
-      }
+  ofstream fout2;
+  fout2.open("data2sM.txt", ios::out | ios::trunc);
+  
+  for(int t=500;t<=1000;t=t+5){
+    for(int a=0;a<=50;a++){
+      System S(t,a);
+      S.begin(10000);
+      int E=S.get_Etat();
+      fout2<<t<<" "<<a<<" "<<E<<"\n";
+      cout<<t<<" "<<a<<" "<<E<<endl;
+    }
   }
+  fout2.close();
   
-  fout.close();
+  ofstream fout3;
+  fout3.open("data3sM.txt", ios::out | ios::trunc);
+  
+  for(int t=1000;t<=1500;t=t+5){
+    for(int a=0;a<=50;a++){
+      System S(t,a);
+      S.begin(10000);
+      int E=S.get_Etat();
+      fout3<<t<<" "<<a<<" "<<E<<"\n";
+      cout<<t<<" "<<a<<" "<<E<<endl;
+    }
+  }
+  fout3.close();
   
 
- 
-//  cout<<"_ _ _ _ _ _ _ _ _ _ _ "<<endl;
-//  S1.begin(10);
-//  cout<<"_ _ _ _ _ _ _ _ _ _ _ "<<endl;
-//  S1.affichageViv();
-//  cout<<"_ _ _ _ _ _ _ _ _ _ _ "<<endl;
-//  S1.affichageFit();
+//En faisant varier D  
+  //~ ofstream fD;
+  //~ 
+  //~ fD.open("datater.txt", ios::out | ios::trunc);
+  //~ fD << "T"<<"  "<<"Ainit"<<" "<<"D"<<" "<<"Etat"<<"\n";
+ //~ 
+//~ 
+  //~ for(int t=11;t<=500;t=t+5){
+    //~ for(int a=0;a<=50;a++){
+      //~ for(float D=0;D<=0.1;D+=0.01){
+        //~ Envir::set_params(D,w,h);
+        //~ System S(t,a);
+        //~ S.begin(10000);
+        //~ int E=S.get_Etat();
+        //~ fD<<t<<" "<<a<<" "<<D<<"  "<<E<<"\n";
+        //~ cout<<t<<" "<<a<<" "<<D<<"  "<<E<<endl;
+      //~ }
+    //~ }
+  //~ }
+  //~ 
+  //~ for(int t=500;t<=1000;t=t+25){
+    //~ for(int a=0;a<=50;a++){
+      //~ for(float D=0;D<=0.1;D+=0.01){
+        //~ Envir::set_params(D,w,h);
+        //~ System S(t,a);
+        //~ S.begin(10000);
+        //~ int E=S.get_Etat();
+        //~ fD<<t<<" "<<a<<" "<<D<<"  "<<E<<"\n";
+        //~ cout<<t<<" "<<a<<" "<<D<<"  "<<E<<endl;
+      //~ }
+    //~ }
+  //~ }
+  //~ fD.close();
+
+
+
   return EXIT_SUCCESS;
 }
 

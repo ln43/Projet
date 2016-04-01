@@ -52,7 +52,6 @@ float System::wMin_=0;
 //                               Public Methods
 // ===========================================================================
   void System::begin(int tempsSimul){ 
-    
     for(int x=0;x<W_;x++){ //1er métabolisme
       for(int y=0;y<H_;y++){
         metabol(x,y);
@@ -70,6 +69,15 @@ float System::wMin_=0;
       }
       if(isDeath()){ //interrompt la simulation si la population est morte
         i=tempsSimul;
+      }
+      run1time();
+    }
+  }
+  
+  void System::beginMeta(int tempsSimul){ 
+    for(int i=0;i<tempsSimul;i++){ 
+      if(i>0 && i%T_==0){ // réinitialisation du milieu tous les T pas de temps
+        env_.reinit(Ainit_);
       }
       run1time();
     }

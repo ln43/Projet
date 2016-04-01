@@ -30,6 +30,7 @@ class System{
   //                                  Setters
   // =========================================================================
   inline static void set_params(int W,int H,float wMin);
+  inline static void set_T(int T);
 
   // =========================================================================
   //                                 Operators
@@ -39,6 +40,7 @@ class System{
   //                              Public Methods
   // =========================================================================
     void begin(int tempsSimul);
+    void beginMeta(int tempsSimul);
     void run1time();
     void metabol(int x,int y);
     int get_Etat(); // Retourne 0 si exctinction, 2 si cohabitation, 1 si S meurt
@@ -74,6 +76,8 @@ class System{
     H_=H;
     wMin_=wMin;
   };
+  
+  inline void System::set_T(int T){T_=T;}
   
 #endif
 
