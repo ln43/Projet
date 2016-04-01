@@ -52,7 +52,7 @@ int main() {
 //Sans faire varier D  
   ofstream fout1;
   
-  fout1.open("data1sM.txt", ios::out | ios::trunc);
+  fout1.open("data1aM.txt", ios::out | ios::trunc);
   fout1 << "T"<<"  "<<"Ainit"<<" "<<"Etat"<<"\n";
  
   for(int t=1;t<=500;t=t+5){
@@ -67,7 +67,7 @@ int main() {
   fout1.close();
   
   ofstream fout2;
-  fout2.open("data2sM.txt", ios::out | ios::trunc);
+  fout2.open("data2aM.txt", ios::out | ios::trunc);
   
   for(int t=500;t<=1000;t=t+5){
     for(int a=0;a<=50;a++){
@@ -81,7 +81,7 @@ int main() {
   fout2.close();
   
   ofstream fout3;
-  fout3.open("data3sM.txt", ios::out | ios::trunc);
+  fout3.open("data3aM.txt", ios::out | ios::trunc);
   
   for(int t=1000;t<=1500;t=t+5){
     for(int a=0;a<=50;a++){

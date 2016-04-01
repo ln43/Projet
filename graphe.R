@@ -1,10 +1,10 @@
 rm(list=ls())
 
-d=read.table("VF.txt",col.names=c("T","Ainit","Etat"),header=T)
+d=read.table("data1sM.txt",col.names=c("T","Ainit","Etat"),header=T)
 
 etat <- factor(d$"Etat")
 mescouleurs <- rainbow(length(levels(etat)))
-plot(d$"T", d$"Ainit", pch = 19, col = mescouleurs[etat], main="Diagramme Transition Sans Mutation",xlab="T",ylab="Ainit")
+plot(d$"T", d$"Ainit", pch = 19,col = mescouleurs[etat], main="Diagramme Transition Sans Mutation",xlab="T",ylab="Ainit")
 legend("topright", inset = 0.02, pch = 19, legend = c("extinction","exclusion","cohabitation"), col = mescouleurs)
 
 #_ _ _ _ _ _ _

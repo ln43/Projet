@@ -30,7 +30,7 @@ class System{
   //                                  Setters
   // =========================================================================
   inline static void set_params(int W,int H,float wMin);
-  inline static void set_T(int T);
+  inline void set_T(int T);
 
   // =========================================================================
   //                                 Operators
