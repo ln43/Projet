@@ -50,49 +50,58 @@ int main() {
 
 
 //Sans faire varier D  
-  ofstream fout1;
-  
-  fout1.open("data1aM.txt", ios::out | ios::trunc);
-  fout1 << "T"<<"  "<<"Ainit"<<" "<<"Etat"<<"\n";
- 
-  for(int t=1;t<=500;t=t+5){
-    for(int a=0;a<=50;a++){
-      System S(t,a);
-      S.begin(10000);
-      int E=S.get_Etat();
-      fout1<<t<<" "<<a<<" "<<E<<"\n";
-      cout<<t<<" "<<a<<" "<<E<<endl;
-    }
-  }
-  fout1.close();
+  //~ ofstream fout1;
+  //~ 
+  //~ fout1.open("data1sM.txt", ios::out | ios::trunc);
+  //~ fout1 << "T"<<"  "<<"Ainit"<<" "<<"Etat"<<"\n";
+ //~ 
+  //~ for(int t=1;t<=700;t=t+5){
+    //~ for(int a=0;a<=50;a++){
+      //~ System S(t,a);
+      //~ S.begin(10000);
+      //~ int E=S.get_Etat();
+      //~ fout1<<t<<" "<<a<<" "<<E<<"\n";
+      //~ cout<<t<<" "<<a<<" "<<E<<endl;
+    //~ }
+  //~ }
+  //~ fout1.close();
   
   ofstream fout2;
-  fout2.open("data2aM.txt", ios::out | ios::trunc);
+  fout2.open("data2sM.txt", ios::out | ios::trunc);
   
-  for(int t=500;t<=1000;t=t+5){
+  for(int t=700;t<1150;t=t+5){ // Pour mut, passer à 780 - 1220
     for(int a=0;a<=50;a++){
-      System S(t,a);
-      S.begin(10000);
-      int E=S.get_Etat();
-      fout2<<t<<" "<<a<<" "<<E<<"\n";
-      cout<<t<<" "<<a<<" "<<E<<endl;
+      int E=0;
+      for(int i=0;i<5;i++){
+        System S(t,a);
+        S.begin(10000);
+        E+=S.get_Etat();
+      }
+      E=E/5;
+      if(E<=1){
+        fout2<<t<<" "<<a<<" "<<0<<"\n";
+        cout<<t<<" "<<a<<" "<<0<<endl;
+      }else {
+        fout2<<t<<" "<<a<<" "<<2<<"\n";
+        cout<<t<<" "<<a<<" "<<2<<endl;        
+      }
     }
   }
   fout2.close();
   
-  ofstream fout3;
-  fout3.open("data3aM.txt", ios::out | ios::trunc);
-  
-  for(int t=1000;t<=1500;t=t+5){
-    for(int a=0;a<=50;a++){
-      System S(t,a);
-      S.begin(10000);
-      int E=S.get_Etat();
-      fout3<<t<<" "<<a<<" "<<E<<"\n";
-      cout<<t<<" "<<a<<" "<<E<<endl;
-    }
-  }
-  fout3.close();
+  //~ ofstream fout3;
+  //~ fout3.open("data3sM.txt", ios::out | ios::trunc);
+  //~ 
+  //~ for(int t=1150;t<=1500;t=t+5){
+    //~ for(int a=0;a<=50;a++){
+      //~ System S(t,a);
+      //~ S.begin(10000);
+      //~ int E=S.get_Etat();
+      //~ fout3<<t<<" "<<a<<" "<<E<<"\n";
+      //~ cout<<t<<" "<<a<<" "<<E<<endl;
+    //~ }
+  //~ }
+  //~ fout3.close();
   
 
 //En faisant varier D  

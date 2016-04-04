@@ -74,16 +74,6 @@ float System::wMin_=0;
     }
   }
   
-  void System::beginMeta(int tempsSimul){ 
-    for(int i=0;i<tempsSimul;i++){ 
-      if(i>0 && i%T_==0){ // réinitialisation du milieu tous les T pas de temps
-        env_.reinit(Ainit_);
-      }
-      run1time();
-    }
-  }
-
-
   void System::run1time(){
 
 
