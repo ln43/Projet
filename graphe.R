@@ -1,6 +1,8 @@
 rm(list=ls())
 
-d=read.table("data1sM.txt",col.names=c("T","Ainit","Etat"),header=T)
+d=rbind(read.table("1sM.txt",col.names=c("T","Ainit","Etat"),header=T),
+             read.table("2sM.txt",col.names=c("T","Ainit","Etat"),header=T),
+             read.table("3sM.txt",col.names=c("T","Ainit","Etat"),header=T))
 
 etat <- factor(d$"Etat")
 mescouleurs <- rainbow(length(levels(etat)))
@@ -10,7 +12,9 @@ legend("topright", inset = 0.02, pch = 19, legend = c("extinction","exclusion","
 #_ _ _ _ _ _ _
 
 
-dmut=read.table("VFmut.txt",col.names=c("T","Ainit","Etat"),header=T)
+dmut=rbind(read.table("1aM.txt",col.names=c("T","Ainit","Etat"),header=T),
+           read.table("2aM.txt",col.names=c("T","Ainit","Etat"),header=T),
+           read.table("3aM.txt",col.names=c("T","Ainit","Etat"),header=T))
 
 etat <- factor(dmut$"Etat")
 mescouleurs <- rainbow(length(levels(etat)))
