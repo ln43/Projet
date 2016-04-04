@@ -1,4 +1,4 @@
-P_mut  0.0
+P_mut  0.00
 P_death   0.02
 W_min   0.001
 RAA   0.1
@@ -8,3 +8,5 @@ RBC   0.1
 D   0.1
 W   32
 H   32
+T  1
+Ainit  25
