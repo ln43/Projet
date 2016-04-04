@@ -86,25 +86,3 @@ using namespace std;
       concent_[i+1]=0;
     }
   }
-  
-  //Methode à supprimer ensuite
-  void Envir::affichageA(){
-    for(int y=0;y<H_;y++){
-      for(int x=0;x<W_;x++){
-          cout<<concent_[(x+y*W_)*2]<<" ";
-      }
-      cout<<endl;
-    }
-     cout<<"_ _ _ _ _ _ _ _ _ _ _ "<<endl;
-  }
-
-  //Methode à supprimer ensuite
-  void Envir::affichageB(){
-    for(int y=0;y<H_;y++){
-      for(int x=0;x<W_;x++){
-          cout<<concent_[(x+y*W_)*2+1]<<" ";
-      }
-      cout<<endl;
-    }
-     cout<<"_ _ _ _ _ _ _ _ _ _ _ "<<endl;
-  }

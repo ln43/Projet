@@ -33,8 +33,6 @@ class Envir{
   //                              Public Methods
   // =========================================================================
     void diffusion();
-    void affichageA();//Methode a supprimer ensuite
-    void affichageB();//Methode a supprimer ensuite
     void reinit(float Ainit);
 
  protected :

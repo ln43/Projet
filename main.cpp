@@ -58,7 +58,7 @@ int main() {
 //Sans faire varier D  
   //Version Moyenne
   
-  cout<<"2D, avec mutation, avec moyenne"<<endl;
+  //~ cout<<"2D, avec mutation, avec moyenne"<<endl;
   //~ ofstream fout1;
   //~ 
   //~ fout1.open("data1aM.txt", ios::out | ios::trunc);
@@ -122,43 +122,43 @@ int main() {
   
   //Version Précise
   
-  cout<<"2D, sans mutation, précis"<<endl;
- 
-  ofstream fout2;
-  fout2.open("data2sMP.txt", ios::out | ios::trunc);
-  
-  for(int t=700;t<1000;t=t+5){ // Pour mut, passer à 780 - 1220
-    for(int a=0;a<=50;a++){
-      int E=0;
-      for(int i=0;i<8;i++){
-        System S(t,a);
-        S.begin(10000);
-        E+=S.get_Etat();
-      }
-      E=E/8;
-      fout2<<t<<" "<<a<<" "<<E<<"\n";
-      cout<<t<<" "<<a<<" "<<E<<endl;
-    }
-  }
-  fout2.close();
-  
-  ofstream fout22;
-  fout22.open("data3sMP.txt", ios::out | ios::trunc);
-  
-  for(int t=1000;t<1200;t=t+5){ // Pour mut, passer à 780 - 1220
-    for(int a=0;a<=50;a++){
-      int E=0;
-      for(int i=0;i<8;i++){
-        System S(t,a);
-        S.begin(10000);
-        E+=S.get_Etat();
-      }
-      E=E/8;
-      fout22<<t<<" "<<a<<" "<<E<<"\n";
-      cout<<t<<" "<<a<<" "<<E<<endl;
-    }
-  }
-  fout22.close();
+  //~ cout<<"2D, sans mutation, précis"<<endl;
+ //~ 
+  //~ ofstream fout2;
+  //~ fout2.open("data2sMP.txt", ios::out | ios::trunc);
+  //~ 
+  //~ for(int t=700;t<1000;t=t+5){ // Pour mut, passer à 780 - 1220
+    //~ for(int a=0;a<=50;a++){
+      //~ int E=0;
+      //~ for(int i=0;i<8;i++){
+        //~ System S(t,a);
+        //~ S.begin(10000);
+        //~ E+=S.get_Etat();
+      //~ }
+      //~ E=E/8;
+      //~ fout2<<t<<" "<<a<<" "<<E<<"\n";
+      //~ cout<<t<<" "<<a<<" "<<E<<endl;
+    //~ }
+  //~ }
+  //~ fout2.close();
+  //~ 
+  //~ ofstream fout22;
+  //~ fout22.open("data3sMP.txt", ios::out | ios::trunc);
+  //~ 
+  //~ for(int t=1000;t<1200;t=t+5){ // Pour mut, passer à 780 - 1220
+    //~ for(int a=0;a<=50;a++){
+      //~ int E=0;
+      //~ for(int i=0;i<8;i++){
+        //~ System S(t,a);
+        //~ S.begin(10000);
+        //~ E+=S.get_Etat();
+      //~ }
+      //~ E=E/8;
+      //~ fout22<<t<<" "<<a<<" "<<E<<"\n";
+      //~ cout<<t<<" "<<a<<" "<<E<<endl;
+    //~ }
+  //~ }
+  //~ fout22.close();
   
   //~ ofstream fout3;
   //~ fout3.open("data3aM.txt", ios::out | ios::trunc);
