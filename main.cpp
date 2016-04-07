@@ -55,135 +55,137 @@ int main() {
   //~ cout<<T<<" "<<ainit<<" "<<S.get_Etat()<<endl;
 
 
-//Sans faire varier D  
-  //Version Moyenne
+//Sans faire varier D    
+  cout<<"2D, sans mutation"<<endl;
   
-  //~ cout<<"2D, avec mutation, avec moyenne"<<endl;
-  //~ ofstream fout1;
-  //~ 
-  //~ fout1.open("data1aM.txt", ios::out | ios::trunc);
-  //~ fout1 << "T"<<"  "<<"Ainit"<<" "<<"Etat"<<"\n";
- //~ 
-  //~ for(int t=1;t<=700;t=t+5){
-    //~ for(int a=0;a<=50;a++){
-      //~ System S(t,a);
-      //~ S.begin(10000);
-      //~ int E=S.get_Etat();
-      //~ fout1<<t<<" "<<a<<" "<<E<<"\n";
-      //~ cout<<t<<" "<<a<<" "<<E<<endl;
-    //~ }
-  //~ }
-  //~ fout1.close();
-  //~ 
-  //~ ofstream fout2;
-  //~ fout2.open("data2aM.txt", ios::out | ios::trunc);
-  //~ 
-  //~ for(int t=700;t<950;t=t+5){ // Pour mut, passer à 780 - 1220
-    //~ for(int a=0;a<=50;a++){
-      //~ int E=0;
-      //~ for(int i=0;i<5;i++){
-        //~ System S(t,a);
-        //~ S.begin(10000);
-        //~ E+=S.get_Etat();
-      //~ }
-      //~ E=E/5;
-      //~ if(E<=1){
-        //~ fout2<<t<<" "<<a<<" "<<0<<"\n";
-        //~ cout<<t<<" "<<a<<" "<<0<<endl;
-      //~ }else {
-        //~ fout2<<t<<" "<<a<<" "<<2<<"\n";
-        //~ cout<<t<<" "<<a<<" "<<2<<endl;        
-      //~ }
-    //~ }
-  //~ }
-  //~ fout2.close();
-  //~ 
-  //~ ofstream fout22;
-  //~ fout22.open("data22aM.txt", ios::out | ios::trunc);
-  //~ 
-  //~ for(int t=1000;t<1200;t=t+5){ 
-    //~ for(int a=0;a<=50;a++){
-      //~ int E=0;
-      //~ for(int i=0;i<5;i++){
-        //~ System S(t,a);
-        //~ S.begin(10000);
-        //~ E+=S.get_Etat();
-      //~ }
-      //~ E=E/5;
-      //~ if(E<=1){
-        //~ fout22<<t<<" "<<a<<" "<<0<<"\n";
-        //~ cout<<t<<" "<<a<<" "<<0<<endl;
-      //~ }else {
-        //~ fout22<<t<<" "<<a<<" "<<2<<"\n";
-        //~ cout<<t<<" "<<a<<" "<<2<<endl;        
-      //~ }
-    //~ }
-  //~ }
+  //1ère zone
+  ofstream fout1;
+  fout1.open("data1sM.txt", ios::out | ios::trunc);
+  fout1 << "T"<<"  "<<"Ainit"<<" "<<"Etat"<<"\n";
+  for(int t=1;t<=26;t=t+5){
+    for(int a=0;a<=50;a++){
+      System S(t,a);
+      S.begin(10000);
+      int E=S.get_Etat();
+      fout1<<t<<" "<<a<<" "<<E<<"\n";
+      cout<<t<<" "<<a<<" "<<E<<endl;
+    }
+  }
+  fout1.close();
   
-  //Version Précise
+  //Affinement première transition
+  ofstream fout2;
+  ofstream f2P;
+  fout2.open("data2sM.txt", ios::out | ios::trunc);
+  f2P.open("data2sMP.txt", ios::out | ios::trunc);
+  for(int t=30;t<50;t=t+5){
+    for(int a=0;a<=50;a++){
+      int E=0;
+      for(int i=0;i<10;i++){
+        System S(t,a);
+        S.begin(10000);
+        E+=S.get_Etat();
+      }
+      E=E/10;
+      f2P<<t<<" "<<a<<" "<<E<<"\n";
+      cout<<t<<" "<<a<<" "<<E<<endl;
+      if(E!=0){
+        if(E<=1.5){
+          fout2<<t<<" "<<a<<" "<<1<<"\n";
+        }else {
+          fout2<<t<<" "<<a<<" "<<2<<"\n";
+        } 
+      }
+    }
+  }
+  fout2.close();
+  f2P.close();
   
-  //~ cout<<"2D, sans mutation, précis"<<endl;
- //~ 
-  //~ ofstream fout2;
-  //~ fout2.open("data2sMP.txt", ios::out | ios::trunc);
-  //~ 
-  //~ for(int t=700;t<1000;t=t+5){ // Pour mut, passer à 780 - 1220
-    //~ for(int a=0;a<=50;a++){
-      //~ int E=0;
-      //~ for(int i=0;i<8;i++){
-        //~ System S(t,a);
-        //~ S.begin(10000);
-        //~ E+=S.get_Etat();
-      //~ }
-      //~ E=E/8;
-      //~ fout2<<t<<" "<<a<<" "<<E<<"\n";
-      //~ cout<<t<<" "<<a<<" "<<E<<endl;
-    //~ }
-  //~ }
-  //~ fout2.close();
-  //~ 
-  //~ ofstream fout22;
-  //~ fout22.open("data3sMP.txt", ios::out | ios::trunc);
-  //~ 
-  //~ for(int t=1000;t<1200;t=t+5){ // Pour mut, passer à 780 - 1220
-    //~ for(int a=0;a<=50;a++){
-      //~ int E=0;
-      //~ for(int i=0;i<8;i++){
-        //~ System S(t,a);
-        //~ S.begin(10000);
-        //~ E+=S.get_Etat();
-      //~ }
-      //~ E=E/8;
-      //~ fout22<<t<<" "<<a<<" "<<E<<"\n";
-      //~ cout<<t<<" "<<a<<" "<<E<<endl;
-    //~ }
-  //~ }
-  //~ fout22.close();
-  
-  //~ ofstream fout3;
-  //~ fout3.open("data3aM.txt", ios::out | ios::trunc);
-  //~ 
-  //~ for(int t=1200;t<=1500;t=t+5){
-    //~ for(int a=0;a<=50;a++){
-      //~ System S(t,a);
-      //~ S.begin(10000);
-      //~ int E=S.get_Etat();
-      //~ fout3<<t<<" "<<a<<" "<<E<<"\n";
-      //~ cout<<t<<" "<<a<<" "<<E<<endl;
-    //~ }
-  //~ }
-  //~ fout3.close();
-  
+  //2ème zone
+  ofstream fout3;
+  fout3.open("data3sM.txt", ios::out | ios::trunc);
+  for(int t=50;t<700;t=t+5){
+    for(int a=0;a<=50;a++){
+      System S(t,a);
+      S.begin(10000);
+      int E=S.get_Etat();
+      fout3<<t<<" "<<a<<" "<<E<<"\n";
+      cout<<t<<" "<<a<<" "<<E<<endl;
+    }
+  }
+  fout3.close();
 
-//~ //En faisant varier D  
+
+  //Affinement deuxième transition
+  ofstream fout4;
+  ofstream f4P;
+  fout4.open("data4sM.txt", ios::out | ios::trunc);
+  f4P.open("data4sMP.txt", ios::out | ios::trunc);
+  for(int t=700;t<1065;t=t+5){
+    for(int a=0;a<=50;a++){
+      int E=0;
+      for(int i=0;i<10;i++){
+        System S(t,a);
+        S.begin(10000);
+        E+=S.get_Etat();
+      }
+      E=E/10;
+      f4P<<t<<" "<<a<<" "<<E<<"\n";
+      cout<<t<<" "<<a<<" "<<E<<endl;
+      if(E<=1){
+        fout4<<t<<" "<<a<<" "<<0<<"\n";
+      }else {
+        fout4<<t<<" "<<a<<" "<<2<<"\n";
+      } 
+    }
+  }
+  fout4.close();
+  f4P.close();
+  
+  //3ème zone
+  ofstream fout5;
+  fout5.open("data5sM.txt", ios::out | ios::trunc);
+  for(int t=1065;t<1500;t=t+5){
+    for(int a=0;a<=50;a++){
+      System S(t,a);
+      S.begin(10000);
+      int E=S.get_Etat();
+      fout5<<t<<" "<<a<<" "<<E<<"\n";
+      cout<<t<<" "<<a<<" "<<E<<endl;
+    }
+  }
+  fout5.close();
+
+
+//En faisant varier D  
   //~ cout<<"3D, sans mutation"<<endl;
+  //~ ofstream fD0;
+  //~ fD0.open("dataD0.txt", ios::out | ios::trunc);
+  //~ fD0 << "T"<<"  "<<"Ainit"<<" "<<"D"<<" "<<"Etat"<<"\n";
+  //~ for(int t=1;t<1500;t=t+5){
+    //~ for(int a=0;a<=50;a++){
+      //~ System S(t,a);
+      //~ S.begin(10000);
+      //~ int E=S.get_Etat();
+      //~ fD0<<t<<" "<<a<<" "<<0<<"  "<<E<<"\n";
+      //~ cout<<t<<" "<<a<<" "<<0<<"  "<<E<<endl;
+    //~ }
+  //~ }
+  //~ fD0.close();
+  
   //~ ofstream fD1;
-  //~ 
+  
   //~ fD1.open("dataD1.txt", ios::out | ios::trunc);
   //~ fD1 << "T"<<"  "<<"Ainit"<<" "<<"D"<<" "<<"Etat"<<"\n";
   //~ for(int t=1;t<250;t=t+5){
     //~ for(int a=0;a<=50;a++){
-      //~ for(float D=0;D<=0.1;D+=0.01){
+      //~ Envir::set_params(0,w,h);
+      //~ System S(t,a);
+      //~ S.begin(10000);
+      //~ int E=S.get_Etat();
+      //~ fD1<<t<<" "<<a<<" "<<0<<"  "<<E<<"\n";
+      //~ cout<<t<<" "<<a<<" "<<0<<"  "<<E<<endl;
+      //~ for(float D=0.00000001;D<=0.1;D=D*10){
         //~ Envir::set_params(D,w,h);
         //~ System S(t,a);
         //~ S.begin(10000);
@@ -200,7 +202,13 @@ int main() {
   //~ fD2 << "T"<<"  "<<"Ainit"<<" "<<"D"<<" "<<"Etat"<<"\n";
   //~ for(int t=250;t<500;t=t+5){
     //~ for(int a=0;a<=50;a++){
-      //~ for(float D=0;D<=0.1;D+=0.01){
+      //~ Envir::set_params(0,w,h);
+      //~ System S(t,a);
+      //~ S.begin(10000);
+      //~ int E=S.get_Etat();
+      //~ fD2<<t<<" "<<a<<" "<<0<<"  "<<E<<"\n";
+      //~ cout<<t<<" "<<a<<" "<<0<<"  "<<E<<endl;
+      //~ for(float D=0.00000001;D<=0.1;D=D*10){
         //~ Envir::set_params(D,w,h);
         //~ System S(t,a);
         //~ S.begin(10000);
@@ -216,7 +224,13 @@ int main() {
   //~ fD3.open("dataD3.txt", ios::out | ios::trunc);
   //~ for(int t=500;t<750;t=t+5){
     //~ for(int a=0;a<=50;a++){
-      //~ for(float D=0;D<=0.1;D+=0.01){
+      //~ Envir::set_params(0,w,h);
+      //~ System S(t,a);
+      //~ S.begin(10000);
+      //~ int E=S.get_Etat();
+      //~ fD3<<t<<" "<<a<<" "<<0<<"  "<<E<<"\n";
+      //~ cout<<t<<" "<<a<<" "<<0<<"  "<<E<<endl;
+      //~ for(float D=0.00000001;D<=0.1;D=D*10){
         //~ Envir::set_params(D,w,h);
         //~ System S(t,a);
         //~ S.begin(10000);
@@ -232,7 +246,13 @@ int main() {
   //~ fD4.open("dataD4.txt", ios::out | ios::trunc); 
   //~ for(int t=750;t<=1000;t=t+5){
     //~ for(int a=0;a<=50;a++){
-      //~ for(float D=0;D<=0.1;D+=0.01){
+      //~ Envir::set_params(0,w,h);
+      //~ System S(t,a);
+      //~ S.begin(10000);
+      //~ int E=S.get_Etat();
+      //~ fD4<<t<<" "<<a<<" "<<0<<"  "<<E<<"\n";
+      //~ cout<<t<<" "<<a<<" "<<0<<"  "<<E<<endl;
+      //~ for(float D=0.00000001;D<=0.1;D=D*10){
         //~ Envir::set_params(D,w,h);
         //~ System S(t,a);
         //~ S.begin(10000);
@@ -248,7 +268,13 @@ int main() {
   //~ fD5.open("dataD5.txt", ios::out | ios::trunc);
   //~ for(int t=1000;t<1250;t=t+5){
     //~ for(int a=0;a<=50;a++){
-      //~ for(float D=0;D<=0.1;D+=0.01){
+      //~ Envir::set_params(0,w,h);
+      //~ System S(t,a);
+      //~ S.begin(10000);
+      //~ int E=S.get_Etat();
+      //~ fD5<<t<<" "<<a<<" "<<0<<"  "<<E<<"\n";
+      //~ cout<<t<<" "<<a<<" "<<0<<"  "<<E<<endl;
+      //~ for(float D=0.00000001;D<=0.1;D=D*10){
         //~ Envir::set_params(D,w,h);
         //~ System S(t,a);
         //~ S.begin(10000);
@@ -264,7 +290,13 @@ int main() {
   //~ fD6.open("dataD6.txt", ios::out | ios::trunc);
   //~ for(int t=1250;t<1500;t=t+5){
     //~ for(int a=0;a<=50;a++){
-      //~ for(float D=0;D<=0.1;D+=0.01){
+      //~ Envir::set_params(0,w,h);
+      //~ System S(t,a);
+      //~ S.begin(10000);
+      //~ int E=S.get_Etat();
+      //~ fD6<<t<<" "<<a<<" "<<0<<"  "<<E<<"\n";
+      //~ cout<<t<<" "<<a<<" "<<0<<"  "<<E<<endl;
+      //~ for(float D=0.00000001;D<=0.1;D=D*10){
         //~ Envir::set_params(D,w,h);
         //~ System S(t,a);
         //~ S.begin(10000);

@@ -1,4 +1,3 @@
-
 // ===========================================================================
 //                                  Includes
 // ===========================================================================
@@ -62,7 +61,6 @@ float System::wMin_=0;
       indiv_[i].set_fitness();
     }
     
-
     for(int i=0;i<tempsSimul;i++){ 
       if(i>0 && i%T_==0){ // réinitialisation du milieu tous les T pas de temps
         env_.reinit(Ainit_);
@@ -75,8 +73,6 @@ float System::wMin_=0;
   }
   
   void System::run1time(){
-
-
     //Phase1 : diffusion des métabolites externes
     env_.diffusion();
     
@@ -207,16 +203,16 @@ float System::wMin_=0;
     }
   }
 
-bool System::isDeath(){
-  int d=0;
-  for(int i=0;i<W_*H_;i++){
-    if(indiv_[i].isVivant()==false){
-      d++;
+  bool System::isDeath(){
+    int d=0;
+    for(int i=0;i<W_*H_;i++){
+      if(indiv_[i].isVivant()==false){
+        d++;
+      }
+    }
+    if (d==W_*H_){
+      return true;
+    }else{
+      return false;
     }
   }
-  if (d==W_*H_){
-    return true;
-  }else{
-    return false;
-  }
-}
