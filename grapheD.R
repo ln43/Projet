@@ -27,7 +27,7 @@ for(i in levels(factor(d$"D"))){
   plot(d$"T"[d$"D"==i], d$"Ainit"[d$"D"==i], pch = 19, col = mescouleurs[etat], main=paste("D = ",i),xlab="T",ylab="Ainit")
 }
 plot(1, type="n", axes=F, xlab="", ylab="",main="Transition de phase \n sans mutation")
-legend("center", inset = 0.02, pch = 19, legend = levels(etat), col = mescouleurs)
+legend("center", inset = 0.02, pch = 19, legend = c("extinction","exclusion","cohabitation"), col = mescouleurs)
 
 #1 graphe
 i=1e-1

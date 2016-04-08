@@ -60,7 +60,7 @@ int main() {
   
   //1ère zone
   ofstream fout1;
-  fout1.open("data1sM.txt", ios::out | ios::trunc);
+  fout1.open("data1aM.txt", ios::out | ios::trunc);
   fout1 << "T"<<"  "<<"Ainit"<<" "<<"Etat"<<"\n";
   for(int t=1;t<=26;t=t+5){
     for(int a=0;a<=50;a++){
@@ -76,11 +76,11 @@ int main() {
   //Affinement première transition
   ofstream fout2;
   ofstream f2P;
-  fout2.open("data2sM.txt", ios::out | ios::trunc);
-  f2P.open("data2sMP.txt", ios::out | ios::trunc);
+  fout2.open("data2aM.txt", ios::out | ios::trunc);
+  f2P.open("data2aMP.txt", ios::out | ios::trunc);
   for(int t=30;t<50;t=t+5){
     for(int a=0;a<=50;a++){
-      int E=0;
+      float E=0;
       for(int i=0;i<10;i++){
         System S(t,a);
         S.begin(10000);
@@ -103,7 +103,7 @@ int main() {
   
   //2ème zone
   ofstream fout3;
-  fout3.open("data3sM.txt", ios::out | ios::trunc);
+  fout3.open("data3aM.txt", ios::out | ios::trunc);
   for(int t=50;t<700;t=t+5){
     for(int a=0;a<=50;a++){
       System S(t,a);
@@ -119,11 +119,11 @@ int main() {
   //Affinement deuxième transition
   ofstream fout4;
   ofstream f4P;
-  fout4.open("data4sM.txt", ios::out | ios::trunc);
-  f4P.open("data4sMP.txt", ios::out | ios::trunc);
-  for(int t=700;t<1065;t=t+5){
+  fout4.open("data4aM.txt", ios::out | ios::trunc);
+  f4P.open("data4aMP.txt", ios::out | ios::trunc);
+  for(int t=700;t<1200;t=t+5){
     for(int a=0;a<=50;a++){
-      int E=0;
+      float E=0;
       for(int i=0;i<10;i++){
         System S(t,a);
         S.begin(10000);
@@ -144,8 +144,8 @@ int main() {
   
   //3ème zone
   ofstream fout5;
-  fout5.open("data5sM.txt", ios::out | ios::trunc);
-  for(int t=1065;t<1500;t=t+5){
+  fout5.open("data5aM.txt", ios::out | ios::trunc);
+  for(int t=1200;t<1500;t=t+5){
     for(int a=0;a<=50;a++){
       System S(t,a);
       S.begin(10000);

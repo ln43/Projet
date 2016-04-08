@@ -1,4 +1,4 @@
-P_mut  0.00
+P_mut  0.001
 P_death   0.02
 W_min   0.001
 RAA   0.1
