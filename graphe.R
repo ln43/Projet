@@ -10,10 +10,10 @@ legend("topright", inset = 0.01, pch = 19, legend = c("extinction","exclusion","
 
 #_ _ _ _ _ _ _
 
-dmut=read.table("VFaMmoy.txt",col.names=c("T","Ainit","Etat"),header=T)
+dmut=read.table("VFaMprec.txt",col.names=c("T","Ainit","Etat"),header=T)
 
 etat <- factor(dmut$"Etat")
 mescouleurs <- colfunc(length(levels(etat)))
 plot(dmut$"T", dmut$"Ainit", pch = 19, col = mescouleurs[etat], main="Diagramme Transition Avec Mutation",xlab="T",ylab="Ainit")
-legend("topright", inset = 0.02, pch = 19, legend = c("extinction","cohabitation"), col = c("red","yellow"))
+legend("topleft", inset = 0.02, pch = 19, legend = c("extinction","cohabitation"), col = c("red","yellow"))
 
